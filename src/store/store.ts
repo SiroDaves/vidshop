@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
+
 import userReducer from "../slices/userSlice"
 import authReducer from "../slices/authSlice"
 import { apiSlice } from "../slices/events-api-slice"

@@ -1,16 +1,17 @@
 import Head from "next/head"
-import FormLayout from "../components/layouts/form_layout"
 import Link from "next/link"
-import styles from "../styles/Form.module.css"
 import Image from "next/image"
-import { getSession } from "next-auth/react"
-import { HiAtSymbol, HiFingerPrint } from "react-icons/hi"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/router"
+import { getSession } from "next-auth/react"
+import { HiAtSymbol, HiFingerPrint } from "react-icons/hi"
+
+import styles from "../styles/Form.module.css"
 import { useAuth } from "../context/AuthContext"
 import toast, { Toaster } from "react-hot-toast"
-import { mapAuthCodeToMessage } from "../firebase/firebaseMapError"
+import FormLayout from "../components/layouts/form_layout"
+import { mapAuthCodeToMessage } from "../lib/firebase/firebaseMapError"
 
 export default function Login() {
   const [show, setShow] = useState(false)

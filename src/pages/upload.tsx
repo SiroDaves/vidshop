@@ -1,13 +1,14 @@
 import Head from "next/head"
-import NavBar from "../components/navigation/main_navbar"
-import styles from "../styles/Form.module.css"
-import FormLayout from "../components/layouts/form_layout"
+import { useRouter } from "next/router"
+import toast, { Toaster } from "react-hot-toast"
 import { useEffect, lazy, useState } from "react"
 import { useSession, getSession } from "next-auth/react"
 import { CloudUploadIcon } from "@heroicons/react/outline"
-import { useRouter } from "next/router"
+
+import styles from "../styles/Form.module.css"
 import { useAuth } from "../context/AuthContext"
-import toast, { Toaster } from "react-hot-toast"
+import FormLayout from "../components/layouts/form_layout"
+import NavBar from "../components/navigation/main_navbar"
 
 import { Dropbox, Error, files } from 'dropbox';
 

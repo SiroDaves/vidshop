@@ -1,14 +1,15 @@
-import "../styles/globals.css"
 import { useEffect } from "react";
-import type { AppProps } from "next/app"
+import { useRouter } from "next/router"
 import { Provider } from "react-redux"
+import type { AppProps } from "next/app"
+import { SessionProvider } from "next-auth/react"
+
+import "../styles/globals.css";
 import { store } from "../store/store"
+import { Modal } from "../utils/model_utils";
 import { AuthProvider } from "../context/AuthContext"
 import { ThemeProvider } from "../context/ThemeContext"
-import { SessionProvider } from "next-auth/react"
-import { useRouter } from "next/router"
 import ProtectedRoute from "../components/protected_route"
-import { Modal } from "../utils/model_utils";
 import { ModalWrapper } from "../components/modals/modal_wrapper";
 
 const noAuthRequired = ["/", "/login", "/signup"]

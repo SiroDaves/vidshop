@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { ModalProps } from "../../types/modal_props";
 
-import { CustomBottomSheet } from "./bottom_sheet";
 import { ModalComponent } from "./modal";
+import { CustomBottomSheet } from "./bottom_sheet";
+import { ModalProps } from "../../types/modal_props";
 
 export interface ModalOpenParams extends ModalProps {
   component?: React.FC<any>;

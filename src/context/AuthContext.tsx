@@ -15,7 +15,7 @@ import {
   GithubAuthProvider,
   signInWithPopup,
 } from "firebase/auth"
-import { auth } from "../firebase/firebase"
+import { auth } from "../lib/firebase/firebase"
 import Loader from "../components/loader"
 
 interface User {

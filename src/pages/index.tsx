@@ -1,10 +1,11 @@
 import Head from "next/head"
-import NavBar from "../components/navigation/main_navbar"
+import { useRouter } from "next/router"
 import { useEffect, lazy, useState } from "react"
 import { useSession, getSession } from "next-auth/react"
-import { setCredential, setFirebaseUser } from "../slices/authSlice"
-import { useRouter } from "next/router"
+
 import { useAuth } from "../context/AuthContext"
+import NavBar from "../components/navigation/main_navbar"
+import { setCredential, setFirebaseUser } from "../slices/authSlice"
 
 const Home = () => {
   const { data: session } = useSession()
