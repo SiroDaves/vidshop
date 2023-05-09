@@ -42,7 +42,7 @@ export default function Register() {
   const onSubmit = async ({ username, email, password }: any) => {
     if (password.length < 6) return
     if (password !== cPwdWatch) return
-    const newUser = new User(username, '', '', email, password)
+    const newUser = new User(username, '', '', email, password, 3)
     try {
       setLoading(true)
       Promise.all([
