@@ -22,21 +22,7 @@ function HomeVideo({ product }: { product: Product }) {
           </div>
           <div className={styles.video_wrapper}>
             <div className={styles.video_card}>
-              <video
-                //className={videoTime < 30 ? styles.video_short : ""}
-                //controls={showControls}
-                src={product.video}
-                muted
-                //ref={videoRef}
-                disablePictureInPicture
-                controlsList="nofullscreen nodownload noremoteplayback noplaybackrate"
-                //onMouseEnter={handleShowControls}
-                //poster={data.thumb_url || ""}
-                //onClick={handlePauseVideo}
-                loop
-                autoPlay
-                playsInline
-              />
+              <Video data={content} />
             </div>
           </div>
         </div>
