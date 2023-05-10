@@ -1,13 +1,13 @@
 export class Product {
-    private categoryid: Number;
+    private categoryid: string;
     private title: string;
     private description: string;
     private features: string;
     private video: string;
-    private price: Number;
-    private discount: Number;
+    private price: number;
+    private discount: number;
 
-    constructor(categoryid: Number, title: string, description: string, features: string, video: string, price: Number, discount: Number) {
+    constructor(categoryid: string, title: string, description: string, features: string, video: string, price: number, discount: number) {
         this.categoryid = categoryid;
         this.title = title;
         this.description = description;

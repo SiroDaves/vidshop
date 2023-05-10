@@ -1,17 +1,40 @@
+import { useEffect, useState } from 'react'
 import Head from "next/head"
-import { useRouter } from "next/router"
-import { useEffect, lazy, useState } from "react"
-import { useSession, getSession } from "next-auth/react"
+import { Link } from 'react-router-dom'
 
-import { useAuth } from "../context/AuthContext"
+import Loader from '../components/loader'
+import { Product } from '../interfaces/product'
+import { fetchProducts } from '../services/products'
+import HomeFeed from "../components/feeds/home_feed"
 import NavBar from "../components/navigation/main_navbar"
-import { setCredential, setFirebaseUser } from "../slices/authSlice"
 
-const Home = () => {
-  const { data: session } = useSession()
-  const router = useRouter()
-  const { currentUser } = useAuth()
-  
+const HomePage = () => {
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
+
+  useEffect(() => {
+    // fetch products and their individual total album
+    const fetchProductsAndAlbums = async () => {
+      setLoading(true)
+      const [productsRes] = await Promise.all([
+        fetchProducts(),
+      ])
+      /*await productsRes.map((product: any) => {
+        product.albumCount = albumsRes.filter(
+          (album: any) => album.productId === product.id
+        ).length
+      })*/
+      setProducts(productsRes)
+      //setAlbums(albumsRes)
+      setLoading(false)
+    }
+    fetchProductsAndAlbums()
+
+    return () => {
+      //clean up hook
+    }
+  }, []);
+
   return (
     <div className="">
       <Head>
@@ -21,25 +44,18 @@ const Home = () => {
       </Head>
       <main className="h-screen md:h-screen">
         <NavBar />
-        <div className="px-2 text-xl font-bold text-center pt-28 text-shadow-md md:mr-0 md:pb-10 md:pt-36 md:text-xl lg:text-2xl 2xl:text-3xl">
+        <div className="px-2 text-xl font-bold text-center pt-28 text-shadow-md md:mr-0 md:pt-20 md:text-xl lg:text-2xl">
           For You! | Fashion | Electronics | Beauty
         </div>
-        <div className="max-w-md py-6 mx-auto sm:px-7 md:max-w-4xl md:px-2 md:py-10">
-
+        <div className="max-w-md mx-auto sm:px-7 md:max-w-4xl md:px-2 ">
+          <div className="pt-12 pageMargin sm:pt-16 md:pt-0">
+            <section>
+              <HomeFeed products={products} />
+            </section>
+          </div>
         </div>
       </main>
     </div>
   )
 }
-
-export default Home
-
-export async function getServerSideProps({ req }: any) {
-  const session = await getSession({ req })
-
-  // if (!session) return { redirect: { destination: "/login", permanent: false } }
-
-  return {
-    props: { session },
-  }
-}
+export default HomePage

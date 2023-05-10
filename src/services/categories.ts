@@ -1,8 +1,8 @@
-import { User } from '../models/user';
+import { Category } from '../models/category';
 import { appServer } from "../lib/globals";
 
-export async function getUsers() {
-  const response = await fetch(`${appServer}user`);
+export async function fetchCategories() {
+  const response = await fetch(`${appServer}category`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -11,8 +11,8 @@ export async function getUsers() {
   return data;
 }
 
-export async function getUserById(id: Number) {
-  const response = await fetch(`${appServer}user/${id}`);
+export async function fetchCategoryById(id: Number) {
+  const response = await fetch(`${appServer}category/${id}`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -21,19 +21,19 @@ export async function getUserById(id: Number) {
   return data;
 }
 
-export async function createUser(user: User) {
-  const response = await fetch(`${appServer}user`, {
+export async function createCategory(category: Category) {
+  const response = await fetch(`${appServer}category`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify(category)
   });
   if (!response.ok) {
     throw new Error('The server has rejected your request. Fix it and try again.');
   }
 
-  console.log("request", JSON.stringify(user));
+  console.log("request", JSON.stringify(category));
 
   const data = await response.json();
   console.log("response", data);

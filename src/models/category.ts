@@ -1,10 +1,10 @@
 export class Category {
-    private parentid: Number;
+    private parentid: string;
     private title: string;
     private description: string;
     private icon: string;
 
-    constructor(parentid: Number, title: string, description: string, icon: string ) {
+    constructor(parentid: string, title: string, description: string, icon: string ) {
         this.parentid = parentid;
         this.title = title;
         this.description = description;

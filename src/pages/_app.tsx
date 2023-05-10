@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import { Provider } from "react-redux"
 import type { AppProps } from "next/app"
 import { SessionProvider } from "next-auth/react"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import "../styles/globals.css";
 import { store } from "../store/store"
