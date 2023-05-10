@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
-import { getFirebaseUser } from "../../slices/authSlice";
 import { useSelector } from "react-redux";
-import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 import { Button, Modal as AntModal } from "antd";
+
+import { getFirebaseUser } from "../../slices/authSlice";
+import { useAuth } from "../../context/AuthContext";
 import { useWindowDimensions } from "../../hooks/useWindowsDimensions";
 import { Modal } from "../../utils/model_utils";
 
@@ -96,7 +97,7 @@ export default function NavBar({ }) {
   };
 
   return (
-    <nav className="fixed top-0 z-10 w-full px-2 py-1 shadow bgNav bg-white/10 bg-gradient-to-r md:px-5">
+    <nav className="fixed top-0 z-10 w-full px-2 py-1 shadow bg-white bgNav bg-white/10 bg-gradient-to-r md:px-5">
       <div className="justify-between px-4 mx-auto md:flex md:items-center md:px-8 lg:max-w-7xl">
         <div>
           <div className="flex items-center justify-between py-2 md:py-2">
