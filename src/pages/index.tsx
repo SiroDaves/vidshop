@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 
 import Loader from '../components/loader'
 import { Product } from '../interfaces/product'
-import Sidebar from '../components/sidebar/sidebar'
 import { fetchProducts } from '../services/products'
 import HomeFeed from "../components/feeds/home_feed"
 import NavBar from "../components/navigation/main_navbar"
-import styles from "../styles/DefaultLayout.module.scss"
+import SidebarLeft from '../components/sidebar/sidebar_left'
+import SidebarRight from '../components/sidebar/sidebar_right'
 
 const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([])
@@ -21,11 +21,6 @@ const HomePage = () => {
       const [productsRes] = await Promise.all([
         fetchProducts(),
       ])
-      /*await productsRes.map((product: any) => {
-        product.albumCount = albumsRes.filter(
-          (album: any) => album.productId === product.id
-        ).length
-      })*/
       setProducts(productsRes)
       //setAlbums(albumsRes)
       setLoading(false)
@@ -46,19 +41,21 @@ const HomePage = () => {
       </Head>
       <main className="h-screen md:h-screen">
         <NavBar />
-        <div className={styles.container}>
-          <Sidebar />
-          <div className={styles.content}>
-            <div className="px-2 text-xl font-bold text-center pt-28 text-shadow-md md:mr-0 md:pt-20 md:text-xl lg:text-2xl">
-              For You! | Fashion | Electronics | Beauty
-            </div>
-            <div className="max-w-md mx-auto sm:px-7 md:max-w-4xl md:px-2 ">
+        <div className="flex justify-center  my-16">
+          <div className="hidden sm:block sm:w-1/4 bg-gray-200 h-screen">
+            <SidebarLeft />
+          </div>
+          <div className="w-full sm:w-1/2 bg-gray-100 h-screen">
+            <div className="max-w-md mx-auto sm:px-7 md:max-w-4xl md:px-2">
               <div className="pt-12 pageMargin sm:pt-16 md:pt-0">
                 <section>
                   <HomeFeed products={products} />
                 </section>
               </div>
             </div>
+          </div>
+          <div className="hidden sm:block sm:w-1/4 bg-gray-200 h-screen">
+            <SidebarRight />
           </div>
         </div>
       </main>

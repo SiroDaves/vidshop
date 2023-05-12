@@ -8,7 +8,7 @@ import Menu from "./menu";
 import styles from "../../styles/Sidebar.module.scss";
 import SuggestedList from "./suggested";
 
-function Sidebar() {
+function SidebarRight() {
   const { currentUser } = useAuth()
 
   return (
@@ -37,4 +37,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default SidebarRight;

@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  // width: 348px;
+  width: 300px;
   max-width: 100%;
   padding-left: 10px;
 
@@ -41,7 +41,7 @@
     // background: var(--white);
     position: fixed;
     z-index: 9;
-    max-width: 348px;
+    max-width: 300px;
     padding-bottom: 15px;
 
     .sidebar_login {
