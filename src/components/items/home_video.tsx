@@ -36,9 +36,9 @@ function HomeVideo({ product }: { product: Product }) {
         </div>
 
         {/* user follow button */}
-        <div className="">
+        <button className="px-4 py-2 mx-2 font-semibold text-sm bg-sky-500 text-white rounded shadow-sm h-8">
           FOLLOW
-        </div>
+        </button>
       </div>
 
       <span className="ml-16">{content.title}</span>
@@ -83,8 +83,10 @@ function HomeVideo({ product }: { product: Product }) {
         </div>
 
       </div>
-
+      <hr className="border-t border-gray-300 my-8"/>
     </div>
+    
+
   )
 }
 

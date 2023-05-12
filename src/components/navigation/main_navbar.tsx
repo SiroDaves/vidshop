@@ -97,7 +97,7 @@ export default function NavBar({ }) {
   };
 
   return (
-    <nav className="fixed top-0 z-10 w-full px-2 py-1 shadow bgNav bg-white bg-gradient-to-r md:px-5">
+    <nav className="fixed top-0 z-10 w-full px-2 py-1 shadow bgNav md:px-5 bg-gradient-to-r from-blue-500 to-indigo-500">
       <div className="justify-between px-4 mx-auto md:flex md:items-center md:px-8">
         <div>
           <div className="flex items-center justify-between py-2 md:py-2">
@@ -145,7 +145,7 @@ export default function NavBar({ }) {
         </div>
         <div>
           <div
-            className={`mt-8 flex-1 justify-self-center pb-3 md:mt-0 md:block md:pb-0 ${navbar ? "block bg-white" : "hidden"
+            className={`mt-8 flex-1 justify-self-center pb-3 md:mt-0 md:block md:pb-0 ${navbar ? "block" : "hidden"
               }`}
           >
             {/*<ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
@@ -158,37 +158,21 @@ export default function NavBar({ }) {
               </li>
             </ul>*/}
             <input
+              className="w-full py-2 pl-10 pr-4 rounded-full bg-gray-100 border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               type="text"
-              className="search-input"
-              placeholder="SEARCH"
+              placeholder="Search"
             />
-            <button className="search-btn">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 ml-2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
-              </svg>
-            </button>
-
+            
             <div className="flex flex-col mt-4 space-y-5 items md:hidden">
-              <div className="flex items-center p-1 cursor-pointer hover:bg-pink-100 hover:dark:bg-pink-800" >
-                <div className="w-full py-2 pl-1 text-black hover:text-" onClick={upload}> BECOME A CREATOR </div>
+              <div className="flex items-center p-1 cursor-pointer" >
+                <div className="w-full py-2 pl-1 text-black hover:text-" onClick={upload}> CREATE </div>
               </div>
               {currentUser ? (
-                <div className="flex items-center p-1 cursor-pointer hover:bg-pink-100 hover:dark:bg-pink-800" >
+                <div className="flex items-center p-1 cursor-pointer" >
                   <div className="w-full py-2 pl-1 text-black hover:text-white" onClick={logout} > LOGOUT </div>
                 </div>
               ) : (
-                <div className="flex items-center p-1 cursor-pointer hover:bg-pink-100 hover:dark:bg-pink-800" >
+                <div className="flex items-center p-1 cursor-pointer" >
                   <div className="w-full py-2 pl-1 text-black hover:text-white" onClick={login}> LOGIN </div>
                 </div>
               )}
@@ -196,16 +180,18 @@ export default function NavBar({ }) {
           </div>
         </div>
         <div className="hidden space-x-2 md:flex md:items-center md:gap-x-8">
-          <div className="flex items-center p-1 cursor-pointer hover:bg-pink-100 hover:dark:bg-pink-800" >
-            <div className="w-full py-2 pl-1 text-black hover:text-" onClick={upload}> BECOME A CREATOR </div>
+          <div className="flex items-center p-1 cursor-pointer" >
+            <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white" onClick={upload}>
+              BECOME A CREATOR
+            </button>
           </div>
           {currentUser ? (
-            <div className="flex items-center p-1 cursor-pointer hover:bg-pink-100 hover:dark:bg-pink-800" >
-              <div className="w-full py-2 pl-1 text-black hover:text-white" onClick={logout} > LOGOUT </div>
+            <div className="flex items-center p-1 cursor-pointer" >
+              <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white" onClick={logout} > LOGOUT </button>
             </div>
           ) : (
-            <div className="flex items-center p-1 cursor-pointer hover:bg-pink-100 hover:dark:bg-pink-800" >
-              <div className="w-full py-2 pl-1 text-black hover:text-white" onClick={login}> LOGIN </div>
+            <div className="flex items-center p-1 cursor-pointer" >
+              <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white" onClick={login}> LOGIN </button>
             </div>
           )}
         </div>
