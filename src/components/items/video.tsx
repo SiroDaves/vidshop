@@ -71,7 +71,6 @@ function Video({ data }: VideoProps): JSX.Element {
       className={videoTime < 30 ? styles.video_short : ""}
       controls={showControls}
       src={data.file_url}
-      muted
       ref={videoRef}
       disablePictureInPicture
       controlsList="nofullscreen nodownload noremoteplayback noplaybackrate"
