@@ -182,7 +182,7 @@ export default function NavBar({ }) {
         <div className="hidden space-x-2 md:flex md:items-center md:gap-x-8">
           <div className="flex items-center p-1 cursor-pointer" >
             <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white" onClick={upload}>
-              BECOME A CREATOR
+              CREATOR
             </button>
           </div>
           {currentUser ? (

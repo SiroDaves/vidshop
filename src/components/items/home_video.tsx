@@ -1,6 +1,11 @@
 import Link from "next/link"
 import Image from "next/image"
 import { IoHeart } from "react-icons/io5"
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+
 import React, { memo, useEffect, useState } from "react"
 import { FaCommentDots, FaShare, FaMusic } from "react-icons/fa"
 
@@ -8,15 +13,48 @@ import { Product } from '../../interfaces/product'
 import Video from '../../components/items/video'
 import styles from "../../styles/Video.module.scss"
 
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 function HomeVideo({ product }: { product: Product }) {
   const [content, setContent] = useState(product);
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     setContent(content);
   }, [content]);
 
   return (
-    <div className="mt-3">
+    <div className="mt-3" onClick={handleOpen}>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {content.title}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Buy this item for Kshs. {content.price}
+          </Typography>
+          <Button onClick={handleClose}>Buy Now</Button>
+        </Box>
+      </Modal>
+
       {/* user user action */}
       <div className="flex flex-wrap">
 
@@ -83,9 +121,9 @@ function HomeVideo({ product }: { product: Product }) {
         </div>
 
       </div>
-      <hr className="border-t border-gray-300 my-8"/>
+      <hr className="border-t border-gray-300 my-8" />
     </div>
-    
+
 
   )
 }

@@ -9,8 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^1.0.6",
+    "@mui/material": "^5.13.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@tippyjs/react": "^4.2.6",
     "@types/node": "18.15.11",
@@ -43,6 +46,7 @@
     "typescript": "5.0.3"
   },
   "devDependencies": {
+    "@types/react-modal": "^3.16.0",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.1"

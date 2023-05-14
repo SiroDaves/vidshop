@@ -9,9 +9,7 @@ interface ProductsListProps {
 function HomeFeed({ products }: ProductsListProps): any {
   return products?.map((product: Product) => (
     <div className="" key={product._id}>
-      <Link href={`/products/${product._id}`}>
-        <HomeVideo product={product} />
-      </Link>
+      <HomeVideo product={product} />
     </div>
   ))
 }
