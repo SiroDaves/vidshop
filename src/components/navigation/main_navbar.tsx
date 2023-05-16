@@ -1,108 +1,46 @@
-import Link from "next/link";
-import Image from "next/image";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
-import { Button, Modal as AntModal } from "antd";
+import Link from 'next/link'
+import Image from 'next/image'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
+import { FaPlus, FaUserCircle, FaShoppingCart } from 'react-icons/fa'
 
-import { getFirebaseUser } from "../../slices/authSlice";
-import { useAuth } from "../../context/AuthContext";
-import { useWindowDimensions } from "../../hooks/useWindowsDimensions";
-import { Modal } from "../../utils/model_utils";
+import { useAuth } from '@/context/AuthContext'
+import { getFirebaseUser } from '@/slices/authSlice'
+import ShoppingCart from '@/components/feeds/shopping_cart'
 
-interface NavBarProps {
-  user: any
-}
 export default function NavBar({ }) {
 
   const [navbar, setNavbar] = useState(false)
   const user = useSelector(getFirebaseUser)
+
+  const [isCartOpen, setIsCartOpen] = useState(false)
+
   const { logoutUser } = useAuth()
   const router = useRouter()
   const { currentUser } = useAuth()
 
-  const dimensions = useWindowDimensions();
-
-  function upload() {
+  function goToUpload() {
     router.push('/upload')
   }
 
-  function login() {
+  function goToLogin() {
     router.push('/login')
   }
 
-  function logout() {
+  function goToLogout() {
     logoutUser()
     router.push('/')
   }
 
-  const HelloWorld = ({
-    callback,
-    data,
-    update,
-    enableBottomSheet = false,
-  }: any) => {
-    return (
-      <div
-        style={{
-          position: "relative",
-        }}
-      >
-        <div className="content">
-          <div>Updated props is {data || "Null"}</div>
-          <div>Hello world</div>
-          <div>Hello world</div>
-        </div>
-        <div
-          className="modal__bottom"
-          style={{
-            position: enableBottomSheet ? "fixed" : "absolute",
-          }}
-        >
-          <Button type="primary" style={{ marginRight: "10px" }} onClick={update}>
-            update props
-          </Button>
-          <Button type="primary" danger onClick={callback}>
-            Cancel
-          </Button>
-        </div>
-      </div>
-    );
-  };
-
-  const openModalAndBottomSheet = () => {
-    Modal.open({
-      title: "Modal Title",
-      enableBottomSheet: dimensions.width < 640,
-      component: HelloWorld,
-      fullScreen: true,
-      props: {
-        callback: () => {
-          //closes the modal
-          Modal.close();
-        },
-        enableBottomSheet: dimensions.width < 640,
-        update: () => {
-          //update the current modal props any where from the application using
-          //this methods
-          Modal.updateProps(
-            {
-              data: "hello",
-            },
-            0
-          );
-        },
-      },
-    });
-  };
-
   return (
+    <>
     <nav className="fixed top-0 z-10 w-full px-2 py-1 shadow bgNav md:px-5 bg-gradient-to-r from-blue-500 to-indigo-500">
       <div className="justify-between px-4 mx-auto md:flex md:items-center md:px-8">
         <div>
           <div className="flex items-center justify-between py-2 md:py-2">
             <Link href="/">
-              <Image src="/vidshop.png" className="cursor-pointer" height="50" width="50" alt="logo" />
+              <Image src="/vidshop.png" className="cursor-pointer" height={50} width={50} alt="logo" />
             </Link>
 
             <div className="md:hidden">
@@ -162,18 +100,18 @@ export default function NavBar({ }) {
               type="text"
               placeholder="Search"
             />
-            
+
             <div className="flex flex-col mt-4 space-y-5 items md:hidden">
               <div className="flex items-center p-1 cursor-pointer" >
-                <div className="w-full py-2 pl-1 text-black hover:text-" onClick={upload}> CREATE </div>
+                <div className="w-full py-2 pl-1 text-black hover:text-" onClick={goToUpload}> CREATE </div>
               </div>
               {currentUser ? (
                 <div className="flex items-center p-1 cursor-pointer" >
-                  <div className="w-full py-2 pl-1 text-black hover:text-white" onClick={logout} > LOGOUT </div>
+                  <div className="w-full py-2 pl-1 text-black hover:text-white" onClick={goToLogout} > LOGOUT </div>
                 </div>
               ) : (
                 <div className="flex items-center p-1 cursor-pointer" >
-                  <div className="w-full py-2 pl-1 text-black hover:text-white" onClick={login}> LOGIN </div>
+                  <div className="w-full py-2 pl-1 text-black hover:text-white" onClick={goToLogin}> LOGIN </div>
                 </div>
               )}
             </div>
@@ -181,23 +119,36 @@ export default function NavBar({ }) {
         </div>
         <div className="hidden space-x-2 md:flex md:items-center md:gap-x-8">
           <div className="flex items-center p-1 cursor-pointer" >
-            <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white" onClick={upload}>
-              CREATOR
+            <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white flex items-center" onClick={goToUpload}>
+              <FaPlus className="mr-1" /> CREATOR
+            </button>
+          </div>
+          <div className="flex items-center p-1 cursor-pointer" >
+            <button className="px-2 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white"
+            onClick={() => setIsCartOpen(!isCartOpen)}>
+              <FaShoppingCart />
             </button>
           </div>
           {currentUser ? (
             <div className="flex items-center p-1 cursor-pointer" >
-              <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white" onClick={logout} > LOGOUT </button>
+              <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white flex items-center" onClick={goToLogout} >
+                LOGOUT <FaUserCircle className="mx-1" />
+              </button>
             </div>
           ) : (
             <div className="flex items-center p-1 cursor-pointer" >
-              <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white" onClick={login}> LOGIN </button>
+              <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white flex items-center" onClick={goToLogin}>
+                LOGIN <FaUserCircle className="mx-1"/>
+              </button>
             </div>
           )}
         </div>
       </div>
 
     </nav>
+
+    <ShoppingCart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
+    </>
   )
 }
 

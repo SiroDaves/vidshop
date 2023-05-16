@@ -4,7 +4,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import { BottomSheet } from "react-spring-bottom-sheet";
 
 import { ModalProps } from "../../types/modal_props";
-import { Modal as ModalUtil } from "../../utils/model_utils";
+import { Modal as ModalUtil } from "../../utils/modal_utils";
 
 export const CustomBottomSheet = forwardRef(
   (propsValues: ModalProps, ref: any) => {

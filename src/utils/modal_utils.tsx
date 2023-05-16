@@ -1,4 +1,4 @@
-import { ModalOpenParams } from "../components/modals/modal_wrapper"; 
+import { ModalOpenParams } from '@/components/modals/modal_wrapper'
 
 export class Modal {
     _currentGlobalLoader = null; //reference variable
