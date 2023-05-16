@@ -3,16 +3,10 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { Button, Modal as AntModal } from "antd";
 
 import { getFirebaseUser } from "../../slices/authSlice";
 import { useAuth } from "../../context/AuthContext";
-import { useWindowDimensions } from "../../hooks/useWindowsDimensions";
-import { Modal } from "../../utils/model_utils";
 
-interface NavBarProps {
-  user: any
-}
 export default function NavBar({ }) {
 
   const [navbar, setNavbar] = useState(false)
@@ -20,8 +14,6 @@ export default function NavBar({ }) {
   const { logoutUser } = useAuth()
   const router = useRouter()
   const { currentUser } = useAuth()
-
-  const dimensions = useWindowDimensions();
 
   function upload() {
     router.push('/upload')
@@ -36,73 +28,13 @@ export default function NavBar({ }) {
     router.push('/')
   }
 
-  const HelloWorld = ({
-    callback,
-    data,
-    update,
-    enableBottomSheet = false,
-  }: any) => {
-    return (
-      <div
-        style={{
-          position: "relative",
-        }}
-      >
-        <div className="content">
-          <div>Updated props is {data || "Null"}</div>
-          <div>Hello world</div>
-          <div>Hello world</div>
-        </div>
-        <div
-          className="modal__bottom"
-          style={{
-            position: enableBottomSheet ? "fixed" : "absolute",
-          }}
-        >
-          <Button type="primary" style={{ marginRight: "10px" }} onClick={update}>
-            update props
-          </Button>
-          <Button type="primary" danger onClick={callback}>
-            Cancel
-          </Button>
-        </div>
-      </div>
-    );
-  };
-
-  const openModalAndBottomSheet = () => {
-    Modal.open({
-      title: "Modal Title",
-      enableBottomSheet: dimensions.width < 640,
-      component: HelloWorld,
-      fullScreen: true,
-      props: {
-        callback: () => {
-          //closes the modal
-          Modal.close();
-        },
-        enableBottomSheet: dimensions.width < 640,
-        update: () => {
-          //update the current modal props any where from the application using
-          //this methods
-          Modal.updateProps(
-            {
-              data: "hello",
-            },
-            0
-          );
-        },
-      },
-    });
-  };
-
   return (
     <nav className="fixed top-0 z-10 w-full px-2 py-1 shadow bgNav md:px-5 bg-gradient-to-r from-blue-500 to-indigo-500">
       <div className="justify-between px-4 mx-auto md:flex md:items-center md:px-8">
         <div>
           <div className="flex items-center justify-between py-2 md:py-2">
             <Link href="/">
-              <Image src="/vidshop.png" className="cursor-pointer" height="50" width="50" alt="logo" />
+              <Image src="/vidshop.png" className="cursor-pointer" height={50} width={50} alt="logo"/>
             </Link>
 
             <div className="md:hidden">

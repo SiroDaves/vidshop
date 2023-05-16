@@ -8,9 +8,9 @@ import Verify from "../../assets/images/verify.svg"
 
 interface AccountItemProps {
   user: {
-    full_name: string;
+    fullname: string;
     username: string;
-    tick?: boolean;
+    verified?: boolean;
   };
   onClick?: () => void;
 }
@@ -22,14 +22,14 @@ function AccountItem({ user, onClick }: AccountItemProps) {
         <Image
           className={styles.account_item_avatar}
           src='/images/user.png'
-          alt={user.full_name}
+          alt={user.fullname}
           width={50}
           height={50}
         />
         <div className={styles.account_item_info}>
           <div className={styles.account_item_username}>
-            <span>{user.full_name}</span>
-            {user.tick && (
+            <span>{user.fullname}</span>
+            {user.verified && (
               <Image
                 className={styles.verify_author}
                 src={Verify}
@@ -50,9 +50,9 @@ function AccountItem({ user, onClick }: AccountItemProps) {
 
 AccountItem.propTypes = {
   user: PropTypes.shape({
-    full_name: PropTypes.string.isRequired,
-    nickname: PropTypes.string.isRequired,
-    tick: PropTypes.bool,
+    fullname: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    verified: PropTypes.bool,
   }).isRequired,
   onClick: PropTypes.func,
 };

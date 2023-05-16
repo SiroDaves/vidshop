@@ -31,7 +31,7 @@ function SidebarRight() {
           <hr className={styles.hr} />
         </div>
 
-        <SuggestedList />
+        {/*<SuggestedList />*/}
       </div>
     </div>
   );

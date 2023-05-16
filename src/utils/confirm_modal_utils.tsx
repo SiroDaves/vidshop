@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { ConfirmationModalProps } from "../types/modal_props";
-import { Modal } from "./model_utils";
+import { Modal } from "./modal_utils";
 
 /**
  * Confirmation Modal

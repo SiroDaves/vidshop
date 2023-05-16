@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import React from "react";
 import { ModalProps } from "../../types/modal_props";
-import { Modal as ModalUtil } from "../../utils/model_utils";
+import { Modal as ModalUtil } from "../../utils/modal_utils";
 
 export const ModalComponent = React.forwardRef(
   (propsValues: ModalProps, ref) => {

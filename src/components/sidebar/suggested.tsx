@@ -7,19 +7,19 @@ function SuggestedList() {
 
   const suggestedList = [
     {
-      "full_name": "Susana",
+      "fullname": "Susana",
       "username": "susana",
-      "tick": false,
+      "verified": false,
     },
     {
-      "full_name": "Kipsang Ruto",
+      "fullname": "Kipsang Ruto",
       "username": "kipsang",
-      "tick": true,
+      "verified": true,
     },
     {
-      "full_name": "The Vidshop",
+      "fullname": "The Vidshop",
       "username": "vidshop",
-      "tick": true,
+      "verified": true,
     }
   ];
 

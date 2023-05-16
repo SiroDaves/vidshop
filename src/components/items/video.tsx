@@ -78,7 +78,7 @@ function Video({ data }: VideoProps): JSX.Element {
       poster={data.thumb_url || ""}
       onClick={handlePauseVideo}
       loop
-      autoPlay
+      //autoPlay
       playsInline
     />
   );
