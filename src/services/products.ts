@@ -2,7 +2,19 @@ import axios from 'axios'
 
 import { appServer } from "../lib/globals"
 import { Product } from '../interfaces/product'
-//import { Productx } from '../models/product';
+import { IGetProductsResponse } from '../interfaces/cart'
+
+export const getProducts = async () => {
+  let response: IGetProductsResponse;
+
+  response = await axios.get(
+    'https://react-shopping-cart-67954.firebaseio.com/products.json'
+  );
+
+  const { products } = response.data || [];
+
+  return products;
+};
 
 export const fetchProducts = async () => {
   const { data } = await axios.get<Product[]>(`${appServer}product`)

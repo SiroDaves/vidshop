@@ -1,21 +1,29 @@
-import React, { useState } from 'react'
-import { Button, Modal, Space } from 'antd'
+import { Modal } from 'antd'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 
 import { Product } from '@/interfaces/product'
-import HomeVideo from '@/components/items/home_video'
+import { formatCurrency } from '@/utils/formatCurrency'
+import ProductItem from '@/components/items/product_item'
+import { useShoppingCart } from '@/context/ShoppingCartContext'
 
 interface ProductsListProps {
   products?: Product[]
 }
 
 function HomeFeed({ products }: ProductsListProps) {
-  const [setProduct, setSelectedProduct] = useState<Product | null>(null);
-
   const { confirm } = Modal;
+  const {
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCart()
+  //const quantity = getItemQuantity(product)
+  //const id = product._id
 
   const handleItemClick = (product: Product) => {
-    setSelectedProduct(product);
+    const buttons = '<div>`Buy ${product?.title} at Ksh. ${product?.price}?`</div>';
+
     confirm({
       title: product.title,
       icon: <ExclamationCircleFilled />,
@@ -24,19 +32,17 @@ function HomeFeed({ products }: ProductsListProps) {
       onOk() {
         return new Promise((resolve, reject) => {
           setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+          increaseCartQuantity(product);
         }).catch(() => console.log('Oops errors!'));
       },
-      onCancel() {},
+      onCancel() { },
     });
   };
 
   return products?.map((product: Product) => (
-    <>
-
-      <div className="" key={product._id} onClick={() => handleItemClick(product)}>
-        <HomeVideo product={product} />
-      </div>
-    </>
+    <div className="" key={product._id} onClick={() => handleItemClick(product)}>
+      <ProductItem product={product} />
+    </div>
   ))
 }
 

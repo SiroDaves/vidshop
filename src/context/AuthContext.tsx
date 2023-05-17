@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useState,
 } from "react"
-import { getCookie, deleteCookie, setCookie } from "cookies-next"
 import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
