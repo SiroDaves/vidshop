@@ -2,7 +2,6 @@ import { Modal } from 'antd'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 
 import { Product } from '@/interfaces/product'
-import { formatCurrency } from '@/utils/formatCurrency'
 import ProductItem from '@/components/items/product_item'
 import { useShoppingCart } from '@/context/ShoppingCartContext'
 
@@ -10,7 +9,7 @@ interface ProductsListProps {
   products?: Product[]
 }
 
-function HomeFeed({ products }: ProductsListProps) {
+function HomeFeed({ products }: ProductsListProps): any  {
   const { confirm } = Modal;
   const {
     getItemQuantity,
@@ -18,8 +17,6 @@ function HomeFeed({ products }: ProductsListProps) {
     decreaseCartQuantity,
     removeFromCart,
   } = useShoppingCart()
-  //const quantity = getItemQuantity(product)
-  //const id = product._id
 
   const handleItemClick = (product: Product) => {
     const buttons = '<div>`Buy ${product?.title} at Ksh. ${product?.price}?`</div>';
