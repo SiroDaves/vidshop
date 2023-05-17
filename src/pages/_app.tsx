@@ -1,17 +1,17 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router"
-import { Provider } from "react-redux"
-import type { AppProps } from "next/app"
-import { SessionProvider } from "next-auth/react"
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { Provider } from 'react-redux'
+import type { AppProps } from 'next/app'
+import { SessionProvider } from 'next-auth/react'
 
-import "antd/dist/reset.css";
-import "@/styles/globals.css";
-import { store } from "@/store/store"
-import { Modal } from "@/utils/modal_utils";
-import { AuthProvider } from "@/context/AuthContext"
-import { ThemeProvider } from "@/context/ThemeContext"
-import ProtectedRoute from "@/components/protected_route"
-import { ModalWrapper } from "@/components/modals/modal_wrapper";
+import 'antd/dist/reset.css'
+import '@/styles/globals.css'
+import { store } from '@/store/store'
+import { Modal } from '@/utils/modal_utils'
+import { AuthProvider } from '@/context/AuthContext'
+import { ThemeProvider } from '@/context/ThemeContext'
+import ProtectedRoute from '@/components/protected_route'
+import { ShoppingCartProvider } from '@/context/ShoppingCartContext'
 
 const noAuthRequired = ["/", "/login", "/signup"]
 
@@ -25,25 +25,25 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <AuthProvider>
-      <ThemeProvider>
-        <SessionProvider session={pageProps.session}>
-          <Provider store={store}>
-            {noAuthRequired.includes(router.pathname) && (
-              <>
-                <Component {...pageProps} />
-                <ModalWrapper ref={(ref) => (globalModalRef = ref)} />
-              </>
-            )}
-            {!noAuthRequired.includes(router.pathname) && (
-              <ProtectedRoute>
-                <Component {...pageProps} />
-                <ModalWrapper ref={(ref) => (globalModalRef = ref)} />
-              </ProtectedRoute>
-            )}
-          </Provider>
-        </SessionProvider>
-      </ThemeProvider>
-    </AuthProvider>
+      <ShoppingCartProvider>
+          <ThemeProvider>
+            <SessionProvider session={pageProps.session}>
+              <Provider store={store}>
+                {noAuthRequired.includes(router.pathname) && (
+                  <>
+                    <Component {...pageProps} />
+                  </>
+                )}
+                {!noAuthRequired.includes(router.pathname) && (
+                  <ProtectedRoute>
+                    <Component {...pageProps} />
+                  </ProtectedRoute>
+                )}
+              </Provider>
+            </SessionProvider>
+          </ThemeProvider>
+      </ShoppingCartProvider>
+    </AuthProvider >
   )
 }
 

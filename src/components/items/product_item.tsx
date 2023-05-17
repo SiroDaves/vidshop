@@ -6,14 +6,25 @@ import { FaCommentDots, FaShare, FaMusic } from "react-icons/fa"
 
 import { Product } from '../../interfaces/product'
 import Video from './product_video'
-import styles from "../../styles/Video.module.scss"
+import styles from '@/styles/Video.module.scss'
+import { formatCurrency } from '@/utils/formatCurrency'
+import { useShoppingCart } from '@/context/ShoppingCartContext'
+import { Button } from "antd"
 
-function HomeVideo({ product }: { product: Product }) {
+function ProductItem({ product }: { product: Product }) {
   const [content, setContent] = useState(product);
 
   useEffect(() => {
     setContent(content);
   }, [content]);
+  const {
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCart()
+  const quantity = getItemQuantity(product)
+  const id = product._id
 
   return (
     <div className="mt-3">
@@ -42,7 +53,36 @@ function HomeVideo({ product }: { product: Product }) {
       </div>
 
       <span className="ml-16">{content.title}</span>
-
+      {/*<div className='mt-auto'>
+        {quantity === 0 ? (
+          <Button className='w-100' onClick={() => increaseCartQuantity(product)}>
+            + Add To Cart
+          </Button>
+        ) : (
+          <div
+            className='d-flex align-items-center flex-column'
+            style={{ gap: '.5rem' }}
+          >
+            <div
+              className='d-flex align-items-center justify-content-center'
+              style={{ gap: '.5rem' }}
+            >
+              <Button onClick={() => decreaseCartQuantity(product)}>-</Button>
+              <div>
+                <span className='fs-3'>{quantity} </span>
+                in cart
+              </div>
+              <Button onClick={() => increaseCartQuantity(product)}>+</Button>
+            </div>
+            <Button
+              onClick={() => removeFromCart(product)}
+            >
+              Remove
+            </Button>
+          </div>
+        )}
+        </div>*/}
+        
       {/* video */}
       <div className="mx-auto">
 
@@ -90,4 +130,4 @@ function HomeVideo({ product }: { product: Product }) {
   )
 }
 
-export default HomeVideo
+export default ProductItem

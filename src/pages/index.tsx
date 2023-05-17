@@ -14,7 +14,7 @@ const Home: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    // fetch products and their individual total album
+    // fetch products
     const fetchProductsAndAlbums = async () => {
       setLoading(true)
       const [productsRes] = await Promise.all([

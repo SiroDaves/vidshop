@@ -34,6 +34,7 @@
     "next": "13.2.4",
     "next-auth": "^4.22.1",
     "react": "18.2.0",
+    "react-bootstrap": "^2.7.4",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "react-hot-toast": "^2.4.1",
@@ -42,6 +43,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.1",
     "react-spring-bottom-sheet": "^3.4.1",
+    "realm-web": "^2.0.0",
     "sass": "^1.62.1",
     "typescript": "5.0.3"
   },
