@@ -3,11 +3,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { FaPlus, FaUserCircle, FaShoppingCart } from 'react-icons/fa'
+import { FaPlus, FaUserCircle, FaInbox, FaShoppingCart } from 'react-icons/fa'
 
 import { useAuth } from '@/context/AuthContext'
 import { getFirebaseUser } from '@/slices/authSlice'
-import ShoppingCart from '@/components/feeds/shopping_cart'
+import { UserDropdown, BadgeIcon } from './menu_helper'
+import ShoppingCart from '@/components/cart/shopping_cart'
 import { useShoppingCart } from '@/context/ShoppingCartContext'
 
 export default function NavBar({ }) {
@@ -17,7 +18,6 @@ export default function NavBar({ }) {
 
   const [isCartOpen, setIsCartOpen] = useState(false)
 
-  const { logoutUser } = useAuth()
   const router = useRouter()
   const { currentUser } = useAuth()
 
@@ -29,6 +29,7 @@ export default function NavBar({ }) {
     router.push('/login')
   }
 
+  const { logoutUser } = useAuth()
   function goToLogout() {
     logoutUser()
     router.push('/')
@@ -124,32 +125,42 @@ export default function NavBar({ }) {
               </div>
             </div>
           </div>
-          <div className="hidden space-x-2 md:flex md:items-center md:gap-x-8">
+          <div className="hidden md:flex md:items-center">
             <div className="flex items-center p-1 cursor-pointer" >
               <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white flex items-center" onClick={goToUpload}>
-                <FaPlus className="mr-1" /> CREATOR
+                <FaPlus className="mr-1" /> CREATE
               </button>
-            </div>
-            <div className="flex items-center p-1 cursor-pointer" onClick={() => setIsCartOpen(!isCartOpen)}>
-              <button className="px-2 py-2 text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white">
-                <FaShoppingCart />
-              </button>
-              {cartQuantity > 0 && (<div className='px-2 py-1 text-sm bg-red-500 text-white rounded-full border-2 border-white'>
-                {cartQuantity}
-              </div>)}
             </div>
             {currentUser ? (
-              <div className="flex items-center p-1 cursor-pointer" >
-                <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white flex items-center" onClick={goToLogout} >
-                  LOGOUT <FaUserCircle className="mx-1" />
-                </button>
-              </div>
+              <>
+                <BadgeIcon
+                  icon={<FaShoppingCart className="text-2xl text-white" />}
+                  badgeContent={cartQuantity}
+                  onClick={() => setIsCartOpen(!isCartOpen)}
+                />
+                <BadgeIcon
+                  icon={<FaInbox className="text-2xl text-white" />}
+                  onClick={() => { }}
+                />
+                <UserDropdown />
+
+              </>
             ) : (
-              <div className="flex items-center p-1 cursor-pointer" >
-                <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white flex items-center" onClick={goToLogin}>
-                  LOGIN <FaUserCircle className="mx-1" />
-                </button>
-              </div>
+              <>
+                <div className="flex items-center p-1 cursor-pointer" onClick={() => setIsCartOpen(!isCartOpen)} >
+                  <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white flex items-center">
+                    <FaShoppingCart className="mr-1" /> CART
+                    {cartQuantity > 0 && (<div className='px-2 ml-2 text-sm bg-white text-red-500 font-bold rounded-full'>
+                      {cartQuantity}
+                    </div>)}
+                  </button>
+                </div>
+                <div className="flex items-center p-1 cursor-pointer" >
+                  <button className="px-4 py-2 font-semibold text-sm bg-sky-500 text-white rounded-full shadow-sm border-2 border-white flex items-center" onClick={goToLogin}>
+                    LOGIN <FaUserCircle className="mx-1" />
+                  </button>
+                </div>
+              </>
             )}
           </div>
         </div>

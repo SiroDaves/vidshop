@@ -1,15 +1,15 @@
 import { Modal } from 'antd'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 
+import ProfileItem from './profile_item'
 import { Product } from '@/interfaces/product'
-import ProductItem from '@/components/items/product_item'
 import { useShoppingCart } from '@/context/ShoppingCartContext'
 
 interface ProductsListProps {
   products?: Product[]
 }
 
-function HomeFeed({ products }: ProductsListProps): any  {
+function ProfileFeed({ products }: ProductsListProps): any {
   const { confirm } = Modal;
   const {
     getItemQuantity,
@@ -36,11 +36,16 @@ function HomeFeed({ products }: ProductsListProps): any  {
     });
   };
 
-  return products?.map((product: Product) => (
-    <div className="" key={product._id} onClick={() => handleItemClick(product)}>
-      <ProductItem product={product} />
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 mx-2">
+      {products?.map((product: Product) => (
+        <div className="bg-gray-200" key={product._id}>
+          <ProfileItem product={product} />
+        </div>
+      ))}
     </div>
-  ))
+  )
+  
 }
 
-export default HomeFeed
+export default ProfileFeed

@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
-import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-import { CartItem } from '../../components/items/cart_item'
+import { CartItem } from './cart_item'
 import { useShoppingCart } from '@/context/ShoppingCartContext'
 import { XIcon, PlusCircleIcon, ArrowNarrowRightIcon } from '@heroicons/react/outline'
 
@@ -11,7 +11,16 @@ interface CartProps {
 }
 
 const ShoppingCart: FC<CartProps> = ({ isCartOpen, setIsCartOpen }) => {
+    const router = useRouter()
     const { cartItems, cartQuantity } = useShoppingCart()
+    const totalPrice = cartItems.reduce(
+        (accumulator, item) => accumulator + item.product.price * item.quantity,
+        0
+    );
+
+    function goToCheckout() {
+        router.push('/checkout')
+    }
 
     const handleCheckout = async () => {
         /*const stripe = await stripePromise;
@@ -63,28 +72,27 @@ const ShoppingCart: FC<CartProps> = ({ isCartOpen, setIsCartOpen }) => {
                         }
                     ) : <span className="italic"> Your Cart is Empty </span>
             }
+            <hr className="my-3" />
 
-            {/* Bottom Menu */}
-            <div className="mt-8">
-                <form className="flex items-center justify-center">
-                    <input
-                        className="form-input w-48"
-                        type="text"
-                        placeholder="Add promocode"
-                    />
-                    <button className="ml-3 flex items-center px-3 py-2 bg-sky-500 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500">
-                        <span>Apply</span>
-                    </button>
-                </form>
+            <div className="grid grid-cols-2 gap-4 content-end">
+                <div>
+                    <h3 className="font-semibold ">Total: </h3>
+                    <h3 className="font-semibold ">(KES) </h3>
+                </div>
+                <div>
+                    <h3 className="text-2xl font-bold text-gray-800 md:py-4 md:text-4xl">{totalPrice.toLocaleString("en-US")}</h3>
+                </div>
             </div>
             <a
                 className="flex items-center justify-center mt-4 px-3 py-2 bg-sky-500 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500 cursor-pointer"
-                onClick={() => handleCheckout()}
+                onClick={goToCheckout}
             >
                 <span>Checkout</span>
                 <ArrowNarrowRightIcon className="w-5 h-5" />
             </a>
             
+
+
         </div>
     );
 };

@@ -19,7 +19,8 @@ export default function Login() {
   const [loadingType, setLoadingType] = useState("")
   const router = useRouter()
   const { loginUser, signInGoogle } = useAuth()
-
+  const callbackUrl = (router.query?.callbackUrl as string) ?? "/"
+  
   const {
     register,
     handleSubmit,
@@ -36,7 +37,7 @@ export default function Login() {
       resetLoadingAndType(true, "cred")
       const res = await loginUser(email, password)
       if (res) {
-        router.push("/")
+        router.push(callbackUrl)
       }
     } catch (err: any) {
       toast.error(mapAuthCodeToMessage(err.code))
@@ -54,8 +55,8 @@ export default function Login() {
       const res = await signInGoogle()
       console.log("res at signInGoogle", res)
       if (res) {
-        router.push("/")
-        resetLoadingAndType(false, "")
+        resetLoadingAndType(false, ""),
+        router.push(callbackUrl)
       }
     } catch (err: any) {
       const msg = mapAuthCodeToMessage(err.code)

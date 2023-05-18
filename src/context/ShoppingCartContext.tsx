@@ -22,7 +22,6 @@ export function useShoppingCart() {
 }
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
-  const [isOpen, setIsOpen] = useState(false)
   const [cartItems, setCartItems] = useLocaleStorage<CartItem[]>(
     'shopping-cart',
     []

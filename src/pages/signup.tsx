@@ -20,6 +20,7 @@ export default function Register() {
   const [show, setShow] = useState({ password: false, cpassword: false })
 
   const router = useRouter()
+  const callbackUrl = (router.query?.callbackUrl as string) ?? "/"
 
   const {
     register,
@@ -50,7 +51,7 @@ export default function Register() {
         await createUser(newUser),
         toast.success('Signup was successful'),
         setLoading(false),
-        router.push("/"),
+        router.push(callbackUrl),
       ]).catch((err) => {
         if (err.response?.data?.message) {
           toast.error(mapAuthCodeToMessage(err.code))
