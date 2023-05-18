@@ -8,10 +8,11 @@ import { getSession } from "next-auth/react"
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi"
 
 import { User } from '../models/user';
-import { createUser } from "../services/users";
+import { createUser } from "../services/user_accounts";
 import styles from "../styles/Form.module.css"
 import { useAuth } from "../context/AuthContext"
 import toast, { Toaster } from "react-hot-toast"
+import { getUsernameFromEmail } from '../utils/formartter'
 import FormLayout from "../components/layouts/form_layout"
 import { mapAuthCodeToMessage } from "../lib/firebase/firebaseMapError"
 
@@ -39,7 +40,6 @@ export default function Login() {
       resetLoadingAndType(true, "cred")
       const result = await loginUser(email, password)
       if (result) {
-        await new User('', '', '', email, password, 3)
         router.push(callbackUrl)
       }
     } catch (err: any) {
@@ -57,9 +57,17 @@ export default function Login() {
       resetLoadingAndType(true, "google")
       const result = await signInGoogle()
       const user = result.user;
-      await new User('', user.name, '', user.email, '', 3)
-      
-      console.log('Google sign was successful', result)
+
+      const [firstName, secondName] = user.displayName.split(' ');
+      const newUser = await new User(
+        getUsernameFromEmail(user.email), 
+        firstName, secondName, user.email, '-', 3)
+
+      console.log('Google sign was successful', user)
+
+      await createUser(newUser)
+      toast.success('Signup was successful')
+
       if (result) {
         resetLoadingAndType(false, ""),
           router.push(callbackUrl)

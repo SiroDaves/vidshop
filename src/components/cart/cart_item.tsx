@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { XIcon, PlusCircleIcon, MinusCircleIcon } from "@heroicons/react/outline";
 
 import { CartItem } from '@/interfaces/product'
-import { formatCurrency } from '@/utils/formatCurrency'
+import { formatCurrency } from '@/utils/formartter'
 import { useShoppingCart } from '@/context/ShoppingCartContext'
 
 export function CartItem({ cartItem }: { cartItem: CartItem }) {

@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 
 import { User } from '../models/user';
-import { createUser } from "../services/users";
+import { createUser } from "../services/user_accounts";
 import Loader from "../components/loader";
 import styles from "../styles/Form.module.css";
 import { useAuth } from "../context/AuthContext";
