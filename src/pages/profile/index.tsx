@@ -6,8 +6,9 @@ import React, { useEffect, useState } from 'react'
 import { FaEdit, FaShare } from 'react-icons/fa'
 import { Tab, initTE } from "tw-elements";
 
-
 import { Product } from '@/interfaces/product'
+import { useAuth } from '@/context/AuthContext'
+import { getFirebaseUser } from '@/slices/authSlice'
 import { fetchProducts } from '@/services/products'
 import NavBar from '@/components/navigation/main_navbar'
 import ProfileFeed from '@/components/profile/profile_feed'
@@ -109,7 +110,7 @@ const Profile: NextPage = () => {
                   role="tabpanel"
                   aria-labelledby="tabs-tab1"
                   data-te-tab-active>
-                  <ProfileFeed products={products} />
+                  {/*<ProfileFeed products={products} />*/}
                 </div>
                 <div
                   className="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
