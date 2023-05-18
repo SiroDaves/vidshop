@@ -4,7 +4,6 @@ import Image from "next/image"
 import type { NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
 import { FaEdit, FaShare } from 'react-icons/fa'
-import { Tab, initTE } from "tw-elements";
 
 import { Product } from '@/interfaces/product'
 import { useAuth } from '@/context/AuthContext'
@@ -13,8 +12,6 @@ import { fetchProducts } from '@/services/products'
 import NavBar from '@/components/navigation/main_navbar'
 import ProfileFeed from '@/components/profile/profile_feed'
 import SidebarRight from '@/components/sidebar/sidebar_right'
- 
-initTE({ Tab });
 
 const Profile: NextPage = () => {
   const [products, setProducts] = useState<Product[]>([])
