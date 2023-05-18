@@ -73,25 +73,30 @@ const ShoppingCart: FC<CartProps> = ({ isCartOpen, setIsCartOpen }) => {
                     ) : <span className="italic"> Your Cart is Empty </span>
             }
             <hr className="my-3" />
+            {
+                cartQuantity > 0 ?
+                    (<>
+                        <div className="grid grid-cols-2 gap-4 content-end">
+                            <div>
+                                <h3 className="font-semibold ">Total: </h3>
+                                <h3 className="font-semibold ">(KES) </h3>
+                            </div>
+                            <div>
+                                <h3 className="text-2xl font-bold text-gray-800 md:py-4 md:text-4xl">{totalPrice.toLocaleString("en-US")}</h3>
+                            </div>
+                        </div>
+                        <a
+                            className="flex items-center justify-center mt-4 px-3 py-2 bg-sky-500 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500 cursor-pointer"
+                            onClick={goToCheckout}
+                        >
+                            <span>Checkout</span>
+                            <ArrowNarrowRightIcon className="w-5 h-5" />
+                        </a>
+                    </>) : (
+                        <></>
+                    )
 
-            <div className="grid grid-cols-2 gap-4 content-end">
-                <div>
-                    <h3 className="font-semibold ">Total: </h3>
-                    <h3 className="font-semibold ">(KES) </h3>
-                </div>
-                <div>
-                    <h3 className="text-2xl font-bold text-gray-800 md:py-4 md:text-4xl">{totalPrice.toLocaleString("en-US")}</h3>
-                </div>
-            </div>
-            <a
-                className="flex items-center justify-center mt-4 px-3 py-2 bg-sky-500 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500 cursor-pointer"
-                onClick={goToCheckout}
-            >
-                <span>Checkout</span>
-                <ArrowNarrowRightIcon className="w-5 h-5" />
-            </a>
-            
-
+            }
 
         </div>
     );

@@ -75,3 +75,5 @@ export const CustomBottomSheet = forwardRef(
     );
   }
 );
+
+CustomBottomSheet.displayName = 'CustomBottomSheet';

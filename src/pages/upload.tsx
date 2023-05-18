@@ -10,8 +10,6 @@ import { useAuth } from "../context/AuthContext"
 import FormLayout from "../components/layouts/form_layout"
 import NavBar from "../components/navigation/main_navbar"
 
-import { Dropbox, Error, files } from 'dropbox';
-
 import { openFileUploadDialog } from "../components/file_picker";
 
 const Uploader = () => {
@@ -23,7 +21,7 @@ const Uploader = () => {
   const [loadingType, setLoadingType] = useState("")
 
   const handleVideoUpload = async () => {
-    const dbx = new Dropbox({ accessToken: process.env.NEXT_PUBLIC_DBX_ACCESS_TOKEN });
+    //const dbx = new Dropbox({ accessToken: process.env.NEXT_PUBLIC_DBX_ACCESS_TOKEN });
 
     openFileUploadDialog().then(event => {
       const file = (event.target.files || [])[0];
@@ -31,7 +29,7 @@ const Uploader = () => {
       if (file) {
         const objectUrl = URL.createObjectURL(file);
 
-        dbx.filesUpload({ path: objectUrl })
+        /*dbx.filesUpload({ path: objectUrl })
           .then((response: any) => {
             console.log(response);
           })
@@ -39,7 +37,7 @@ const Uploader = () => {
 
             toast.error(uploadErr.user_message.text);
             console.log(uploadErr);
-          });
+          });*/
       } else {
         throw new Error("upload failed");
       }

@@ -1,4 +1,4 @@
-import { ModalOpenParams } from "../component/molecules"; 
+import { ModalOpenParams } from "../components/molecules"; 
 
 export class Modal {
     _currentGlobalLoader = null; //reference variable

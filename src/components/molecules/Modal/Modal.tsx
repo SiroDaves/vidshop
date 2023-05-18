@@ -1,5 +1,6 @@
 import { Modal } from "antd";
 import React from "react";
+
 import { ModalProps } from "../../../types/modal_props";
 import { Modal as ModalUtil } from "../../../utils/model_utils";
 
@@ -53,3 +54,5 @@ export const ModalComponent = React.forwardRef(
     );
   }
 );
+
+ModalComponent.displayName = 'ModalComponent';
