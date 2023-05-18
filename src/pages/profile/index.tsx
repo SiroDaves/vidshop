@@ -107,7 +107,7 @@ const Profile: NextPage = () => {
                   role="tabpanel"
                   aria-labelledby="tabs-tab1"
                   data-te-tab-active>
-                  {/*<ProfileFeed products={products} />*/}
+                  <ProfileFeed products={products} />
                 </div>
                 <div
                   className="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
