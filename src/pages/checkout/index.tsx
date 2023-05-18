@@ -41,7 +41,7 @@ const Home: NextPage = () => {
 
       <main className="h-screen md:h-screen">
         <NavBar />
-        <div className="flex justify-center my-16">
+        <div className="flex justify-center  my-16">
           <div className="hidden sm:block sm:w-1/4 bg-gray-200 h-screen">
             <SidebarLeft />
           </div>

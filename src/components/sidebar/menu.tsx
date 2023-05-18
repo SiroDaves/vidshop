@@ -3,7 +3,6 @@ import { FaHome } from "react-icons/fa";
 import { BsCameraVideo, BsPeople } from "react-icons/bs";
 
 import Tab from "./tab";
-import { config } from "../../config/index";
 import styles from "../../styles/Menu.module.scss";
 
 function Menu() {

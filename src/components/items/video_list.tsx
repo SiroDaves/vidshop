@@ -11,7 +11,7 @@ interface VideoProps {
   };
 }
 
-function Video({ data }: VideoProps): JSX.Element {
+function VideoList({ data }: VideoProps): JSX.Element {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showControls, setShowControls] = useState<boolean>(false);
   const videoTime: number = data.meta?.playtime_seconds || 0;
@@ -84,4 +84,4 @@ function Video({ data }: VideoProps): JSX.Element {
   );
 }
 
-export default Video;
+export default VideoList;

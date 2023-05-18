@@ -4,11 +4,11 @@ import { IoHeart } from "react-icons/io5"
 import React, { useEffect, useState } from "react"
 import { FaCommentDots, FaShare, FaMusic } from "react-icons/fa"
 
+import Video from '../items/video_list'
 import { Product } from '../../interfaces/product'
-import Video from './product_video'
 import styles from "../../styles/Video.module.scss"
 
-function HomeVideo({ product }: { product: Product }) {
+function HomeItem({ product }: { product: Product }) {
   const [content, setContent] = useState(product);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function HomeVideo({ product }: { product: Product }) {
             <Image className="rounded-full mx-2" src="/images/user.png" alt="" width="50" height="50" />
             <div className="flex-grow">
               <Link href="/" className="flex-grow">
-                <h3 className="text-bold">johndoe</h3>
+                <h3 className="font-semibold">johndoe</h3>
                 <h3 className="">John Doe</h3>
               </Link>
             </div>
@@ -90,4 +90,4 @@ function HomeVideo({ product }: { product: Product }) {
   )
 }
 
-export default HomeVideo
+export default HomeItem
