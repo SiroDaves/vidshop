@@ -16,20 +16,23 @@ function SidebarRight() {
       <div className={styles.sidebar_scrollbar}>
         <Menu />
         <hr className={styles.hr} />
-
-        <div className={styles.sidebar_login_wrapper}>
-          <div className={styles.sidebar_login}>
-            <p className={styles.login_tip}>
-              Log in to follow creators, like videos, and view comments.
-            </p>
-            <Link href='/login'>
-              <Button className={styles.button_login}>
-                Log in
-              </Button>
-            </Link>
+        {currentUser ? (
+          <div></div>
+        ) : (
+          <div className={styles.sidebar_login_wrapper}>
+            <div className={styles.sidebar_login}>
+              <p className={styles.login_tip}>
+                Log in to follow creators, like videos, and view comments.
+              </p>
+              <Link href='/login'>
+                <Button className={styles.button_login}>
+                  Log in
+                </Button>
+              </Link>
+            </div>
+            <hr className={styles.hr} />
           </div>
-          <hr className={styles.hr} />
-        </div>
+        )}
 
         <SuggestedList />
       </div>

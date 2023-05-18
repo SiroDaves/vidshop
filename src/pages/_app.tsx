@@ -9,6 +9,7 @@ import '@/styles/globals.css'
 import { store } from '@/store/store'
 import { Modal } from '@/utils/modal_utils'
 import { AuthProvider } from '@/context/AuthContext'
+import { ModalWrapper } from '@/components/molecules'
 import { ThemeProvider } from '@/context/ThemeContext'
 import ProtectedRoute from '@/components/protected_route'
 import { ShoppingCartProvider } from '@/context/ShoppingCartContext'
@@ -26,22 +27,24 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
       <ShoppingCartProvider>
-          <ThemeProvider>
-            <SessionProvider session={pageProps.session}>
-              <Provider store={store}>
-                {noAuthRequired.includes(router.pathname) && (
-                  <>
-                    <Component {...pageProps} />
-                  </>
-                )}
-                {!noAuthRequired.includes(router.pathname) && (
-                  <ProtectedRoute>
-                    <Component {...pageProps} />
-                  </ProtectedRoute>
-                )}
-              </Provider>
-            </SessionProvider>
-          </ThemeProvider>
+        <ThemeProvider>
+          <SessionProvider session={pageProps.session}>
+            <Provider store={store}>
+              {noAuthRequired.includes(router.pathname) && (
+                <>
+                  <Component {...pageProps} />
+                  <ModalWrapper ref={(ref) => (globalModalRef = ref)} />
+                </>
+              )}
+              {!noAuthRequired.includes(router.pathname) && (
+                <ProtectedRoute>
+                  <Component {...pageProps} />
+                  <ModalWrapper ref={(ref) => (globalModalRef = ref)} />
+                </ProtectedRoute>
+              )}
+            </Provider>
+          </SessionProvider>
+        </ThemeProvider>
       </ShoppingCartProvider>
     </AuthProvider >
   )

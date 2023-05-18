@@ -13,7 +13,6 @@
     "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^1.0.6",
-    "@mui/material": "^5.13.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@tippyjs/react": "^4.2.6",
     "@types/node": "18.15.11",
@@ -24,7 +23,6 @@
     "classnames": "^2.3.2",
     "cookies-next": "^2.1.1",
     "date-fns": "^2.30.0",
-    "dropbox": "^10.34.0",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
     "firebase": "^9.21.0",
@@ -43,7 +41,6 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.1",
     "react-spring-bottom-sheet": "^3.4.1",
-    "realm-web": "^2.0.0",
     "sass": "^1.62.1",
     "typescript": "5.0.3"
   },

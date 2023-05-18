@@ -7,6 +7,8 @@ import { useRouter } from "next/router"
 import { getSession } from "next-auth/react"
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi"
 
+import { User } from '../models/user';
+import { createUser } from "../services/users";
 import styles from "../styles/Form.module.css"
 import { useAuth } from "../context/AuthContext"
 import toast, { Toaster } from "react-hot-toast"
@@ -18,9 +20,9 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const [loadingType, setLoadingType] = useState("")
   const router = useRouter()
-  const { loginUser, signInGoogle } = useAuth()
+  const { loginUser, signInGoogle, currentUser } = useAuth()
   const callbackUrl = (router.query?.callbackUrl as string) ?? "/"
-  
+
   const {
     register,
     handleSubmit,
@@ -35,8 +37,9 @@ export default function Login() {
   const onSubmit = async ({ email, password }: any) => {
     try {
       resetLoadingAndType(true, "cred")
-      const res = await loginUser(email, password)
-      if (res) {
+      const result = await loginUser(email, password)
+      if (result) {
+        await new User('', '', '', email, password, 3)
         router.push(callbackUrl)
       }
     } catch (err: any) {
@@ -52,11 +55,14 @@ export default function Login() {
   const handleGoogleSignin = async () => {
     try {
       resetLoadingAndType(true, "google")
-      const res = await signInGoogle()
-      console.log("res at signInGoogle", res)
-      if (res) {
+      const result = await signInGoogle()
+      const user = result.user;
+      await new User('', user.name, '', user.email, '', 3)
+      
+      console.log('Google sign was successful', result)
+      if (result) {
         resetLoadingAndType(false, ""),
-        router.push(callbackUrl)
+          router.push(callbackUrl)
       }
     } catch (err: any) {
       const msg = mapAuthCodeToMessage(err.code)
@@ -66,7 +72,7 @@ export default function Login() {
       resetLoadingAndType(false, "")
     }
   }
-  
+
   return (
     <FormLayout>
       <Head>
@@ -88,9 +94,8 @@ export default function Login() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div
-            className={`${styles.inputgroup} ${
-              errors.email && "border-red-500"
-            }`}
+            className={`${styles.inputgroup} ${errors.email && "border-red-500"
+              }`}
           >
             <input
               className={styles.inputtext}
@@ -104,9 +109,8 @@ export default function Login() {
           </div>
 
           <div
-            className={`${styles.inputgroup} ${
-              errors.password && "border-red-500"
-            }`}
+            className={`${styles.inputgroup} ${errors.password && "border-red-500"
+              }`}
           >
             <input
               className={styles.inputtext}
@@ -134,9 +138,8 @@ export default function Login() {
           </div>
           <div className="input-button">
             <button
-              className={`${styles.button_custom} ${
-                loading && "text-gray-400"
-              }`}
+              className={`${styles.button_custom} ${loading && "text-gray-400"
+                }`}
               type="button"
               onClick={handleGoogleSignin}
               disabled={loading}
@@ -145,18 +148,18 @@ export default function Login() {
                 "loading..."
               ) : (
                 <>
-                <Image
-                  src={"/images/google.svg"}
-                  width="20"
-                  height={20}
-                  alt="google"
-                />
+                  <Image
+                    src={"/images/google.svg"}
+                    width="20"
+                    height={20}
+                    alt="google"
+                  />
                   {" "}Sign In with Google
                 </>
               )}
             </button>
           </div>
-          
+
         </form>
 
         {/* button */}

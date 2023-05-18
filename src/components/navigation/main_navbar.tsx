@@ -138,10 +138,10 @@ export default function NavBar({ }) {
                   badgeContent={cartQuantity}
                   onClick={() => setIsCartOpen(!isCartOpen)}
                 />
-                <BadgeIcon
+                {/*<BadgeIcon
                   icon={<FaInbox className="text-2xl text-white" />}
                   onClick={() => { }}
-                />
+                />*/}
                 <UserDropdown />
 
               </>
